@@ -23,3 +23,27 @@ def WritingInFile(names, sequences, fileName):
             f.write(names[i] + ':\n')
             for j in range(len(sequences[i])):
                 f.write('\t' + str(sequences[i][j]) + '\n')
+
+def FindResponds(x1, x2, outputFile, N):
+    p = 0.08
+    w2 = .0
+    dispers = .0
+    U = np.zeros(N)
+    y = np.zeros(N)
+    t = .0
+
+    for i in range(N):        
+        mean, U[i] = means(x1[i], x2[i], N)
+        tr = (U[i] - mean)
+        w2 += tr.transpose() * (U[i] - mean)
+
+    w2 = w2 / (N - 1)
+    dispers = p * w2
+    ej = np.random.normal(0, dispers, N)
+
+    for i in range(N):
+        y[i] = U[i] + ej[i]
+    
+    WritingInFile(['U', 'ej', 'y'], [U, y, ej], outputFile)
+
+    return y
