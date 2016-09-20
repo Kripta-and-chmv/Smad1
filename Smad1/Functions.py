@@ -2,18 +2,19 @@ import matplotlib.pyplot as plt
 import sympy as sp
 import numpy as np
 
-def func(X, Y):
+def Func(X, Y):
     return 1 + X - sp.exp(-X ** 2) + Y ** 2
 
-def means(x, y, N):
+def FindMean(x, y, U):
+    N=len(x)
     mean = .0
-    f = func(x, y)
     for i in range(N):
-        mean += f
+        U[i] = Func(x[i], y[i])
+        mean += U[i]
     mean = mean / N
-    return mean, f
+    return mean
 
-def graph(x, y):
+def Graph(x, y):
     p1 = plt.plot(x, y, 'ro')
     plt.show()
 
@@ -32,8 +33,9 @@ def FindResponds(x1, x2, outputFile, N):
     y = np.zeros(N)
     t = .0
 
+    mean = FindMean(x1, x2, U)
+    
     for i in range(N):        
-        mean, U[i] = means(x1[i], x2[i], N)
         tr = (U[i] - mean)
         w2 += tr.transpose() * (U[i] - mean)
 

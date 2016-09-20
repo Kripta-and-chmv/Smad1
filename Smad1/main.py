@@ -17,5 +17,5 @@ f.FindResponds(x1, x2, 'u_y_ej_x1_x2.txt', N)
 
 f.WritingInFile(['x1', 'x2'], [x1, x2], 'x1x2.txt')
 
-f.graph(x1, y_x1_0)
-f.graph(x2, y_0_x2)
+f.Graph(x1, y_x1_0)
+f.Graph(x2, y_0_x2)
