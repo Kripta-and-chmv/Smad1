@@ -28,7 +28,9 @@ ej = np.random.normal(0, dispers, N)
 for i in range(N):
     y[i] = U[i] + ej[i]
 
-f.WritingInFile(x1, x2, y, U, ej)
+names=['x1', 'x2']
+seq = [x1, x2]
+f.WritingInFile(names, seq, 'x1x2.txt')
 
 #f.graph(x1, y)
 f.graph(x2, y)
