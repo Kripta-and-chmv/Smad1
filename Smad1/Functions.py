@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import sympy as sp
 import numpy as np
+import math
 
 def Func(X, Y):
     return 1 + X - sp.exp(-X ** 2) + Y ** 2
@@ -31,21 +32,21 @@ def FindResponds(x1, x2, outputFile, N):
     dispers = .0
     U = np.zeros(N)
     y = np.zeros(N)
-    t = .0
+    tr = .0
 
     mean = FindMean(x1, x2, U)
     
     for i in range(N):        
-        tr = (U[i] - mean)
-        w2 += tr.transpose() * (U[i] - mean)
+        tr = U[i] - mean
+        w2 += tr ** 2
 
     w2 = w2 / (N - 1)
-    dispers = p * w2
+    dispers = math.sqrt(p * w2)
     ej = np.random.normal(0, dispers, N)
 
     for i in range(N):
         y[i] = U[i] + ej[i]
     
-    WritingInFile(['U', 'ej', 'y'], [U, y, ej], outputFile)
+    WritingInFile(['U', 'ej', 'y'], [U, ej, y], outputFile)
 
     return y
